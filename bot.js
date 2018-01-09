@@ -11,12 +11,12 @@ var Twitter = new twit(config);
 // RETWEET BOT ==========================
 //
 // find latest tweet according the query 'q' in params
-var retweet = function() {
+function retweet() {
     var params = {
         q: '"#starfrosch  min_retweets:2 min_faves:2" OR "#hot111 min_retweets:2" OR "#ccmusic min_retweets:2 min_faves:2"',  // REQUIRED
         result_type: 'recent',
         lang: 'en'
-    }
+    };
     Twitter.get('search/tweets', params, function(err, data) {
       // if there no errors
         if (!err) {
@@ -47,19 +47,24 @@ retweet();
 setInterval(retweet, 60000);
 
 //
-// FAVORITE BOT====================
+// FAVORITE and FOLLOW BOT====================
 //
-// find a random tweet and 'favorite' it
-var favoriteTweet = function(){
+// find a random tweet and favorite it and follow the user
+function favoriteFollowRandomTweet(){
+  console.log('favoriteFollowRandomTweet: Event is running');
   var params = {
       q: '"#YouTuber -buy -promo min_retweets:2 min_faves:2" OR "vlog  min_retweets:2 min_faves:2" OR "starfrosch" OR "#ccmusic" OR "#hot111"',  // REQUIRED
       result_type: 'recent',
       lang: 'en'
-  }
+  };
   // for more parametes, see: https://dev.twitter.com/rest/reference
 
   // find the tweet
   Twitter.get('search/tweets', params, function(err,data){
+    if(err){
+      console.log("favoriteRandomTweet: search/tweets: Failed: " + err);
+      return;
+    }
 
     // find tweets
     var tweet = data.statuses;
@@ -71,19 +76,39 @@ var favoriteTweet = function(){
       Twitter.post('favorites/create', {id: randomTweet.id_str}, function(err, response){
         // if there was an error while 'favorite'
         if(err){
-          console.log('Favorite:  ' + err);
+          console.log('favoriteRandomTweet:  ' + err);
         }
         else{
-          console.log('Favorite: Success: ' + randomTweet.id_str);
+          console.log('favoriteRandomTweet: Success: ' + randomTweet.id_str);
         }
       });
     }
+//
+// choose a random tweet by topic and follow that user
+//
+    var tweets = data.statuses;
+    var rTweet = randIndex(tweets);
+    if(typeof rTweet != 'undefined')
+    {
+      var target = rTweet.user.id_str;
+
+      Twitter.post('friendships/create', { id: target }, function(err, data, response) {
+      if(err){
+        console.log("followRandomTweet: friendships/create: " + target + " " + err);
+      }
+      else{
+        console.log("followRandomTweet: friendship/create: " + target);
+      }
+      });
+    }
+
   });
 }
 // grab & 'favorite' as soon as program is running...
-favoriteTweet();
-// 'favorite' a tweet in every 30 seconds
-setInterval(favoriteTweet, 30000);
+favoriteFollowRandomTweet();
+// 'favorite' a tweet in every 3 minutes
+setInterval(favoriteFollowRandomTweet, 180000);
+
 
 // Use Streams API for interacting with a USER ==========
 // set up a user stream
@@ -128,7 +153,7 @@ function followed(event) {
 function tweetNow(tweetTxt) {
   var tweet = {
       status: tweetTxt
-  }
+  };
   Twitter.post('statuses/update', tweet, function(err, data, response) {
     if(err){
       console.log("Tweet: Error in Replying: " + err + " " + tweetTxt);
