@@ -36,7 +36,7 @@ function retweet() {
         }
         // if unable to Search a tweet
         else {
-          console.log('Retweeted: Something went wrong while searching.');
+          console.log('Retweeted: Search Error: ' + err);
         }
     });
 }
@@ -180,7 +180,7 @@ function randomFollow() {
 
       Twitter.get('friends/ids', { user_id: randFollower }, function(err, response) {
         if(err){
-          console.log("randomFollow: fiends/ids: " + randFollower + " " + err);
+          console.log("randomFollow: friends/ids: " + randFollower + " " + err);
           return;
         }
           var friends = response.ids
@@ -233,7 +233,7 @@ function pruneFollowers () {
               pruned = true;
               Twitter.post('friendships/destroy', { id: target }, function(err, data, response) {
               if(err){
-                console.log("pruneFollowers: friendships/destroy: " + target + err);
+                console.log("pruneFollowers: friendships/destroy: " + target + " "+ err);
               }
               else{
                 console.log("pruneFollowers: friendships/destroy: " + target);
@@ -247,8 +247,8 @@ function pruneFollowers () {
 
 // prune as program is running...
 pruneFollowers();
-// prune in every 9 minutes
-setInterval(pruneFollowers, 540000);
+// prune in every 6 minutes
+setInterval(pruneFollowers, 360000);
 
 function randIndex (arr) {
   var index = Math.floor(arr.length*Math.random());
