@@ -43,8 +43,8 @@ function retweet() {
 
 // grab & retweet as soon as program is running...
 retweet();
-// retweet in every 1 minutes
-setInterval(retweet, 60000);
+// retweet in every 3 minutes
+setInterval(retweet, 180000);
 
 //
 // FAVORITE and FOLLOW BOT====================
