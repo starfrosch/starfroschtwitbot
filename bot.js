@@ -97,7 +97,7 @@ function favoriteFollowRandomTweet(){
         console.log("followRandomTweet: friendships/create: " + target + " " + err);
       }
       else{
-        console.log("followRandomTweet: friendship/create: " + target);
+        console.log("followRandomTweet: friendships/create: " + target);
       }
       });
     }
