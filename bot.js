@@ -7,6 +7,8 @@ var
 
 var Twitter = new twit(config);
 
+var friendsDiff = 0;
+
 //
 // RETWEET BOT ==========================
 //
@@ -98,6 +100,8 @@ function favoriteFollowRandomTweet(){
       }
       else{
         console.log("followRandomTweet: friendships/create: " + target);
+        friendsDiff++;
+        console.log("followRandomTweet: friendsDiff: " + friendsDiff);
       }
       });
     }
@@ -146,6 +150,8 @@ function followed(event) {
     }
     else{
       console.log("Followed: friendships/create: Success: " + screenName);
+      friendsDiff++;
+      console.log("followRandomTweet: friendsDiff: " + friendsDiff);
     }
   });
 };
@@ -213,6 +219,8 @@ function randomFollow() {
           }
           else{
             console.log("randomFollow: friendship/create: " + target);
+            friendsDiff++;
+            console.log("followRandomTweet: friendsDiff: " + friendsDiff);
           }
         });
 
@@ -229,18 +237,30 @@ setInterval(randomFollow, 180000);
 //  prune all users that don't follow back
 //
 
-function pruneFollowers () {
-  console.log('pruneFollowers: Event is running');
+function pruneFriends () {
+  console.log('pruneFriends: Event is running');
+  // keep the following (friends) at a stable number
+  if (friendsDiff < 0) {
+  // minus following: slow down prune Followers to every 6 minutes
+    setInterval(pruneFriends, 360000);
+    console.log("friendsDiff: setInterval prune slower. " + friendsDiff);
+  }
+  else {
+  // plus following: speed up prune Followers to every 3 minutes
+    setInterval(pruneFriends, 180000);
+    console.log("friendsDiff: setInterval prune faster. " + friendsDiff);
+  }
+  
   Twitter.get('followers/ids', function(err, response) {
       if(err){
-        console.log("pruneFollowers: followers/ids: " + err);
+        console.log("pruneFriends: followers/ids: " + err);
         return;
       }
       var followers = response.ids;
 
       Twitter.get('friends/ids', function(err, response) {
         if(err){
-          console.log("pruneFollowers: friends/ids: " + err);
+          console.log("pruneFriends: friends/ids: " + err);
           return;
         }
           var friends = response.ids
@@ -254,10 +274,12 @@ function pruneFollowers () {
               pruned = true;
               Twitter.post('friendships/destroy', { id: target }, function(err, data, response) {
               if(err){
-                console.log("pruneFollowers: friendships/destroy: " + target + " "+ err);
+                console.log("pruneFriends: friendships/destroy: " + target + " "+ err);
               }
               else{
-                console.log("pruneFollowers: friendships/destroy: " + target);
+                console.log("pruneFriends: friendships/destroy: " + target);
+                friendsDiff = friendsDiff - 1;
+                console.log("pruneFriends: friendsDiff: " + friendsDiff);
               }
             });
             }
@@ -267,9 +289,7 @@ function pruneFollowers () {
 };
 
 // prune as program is running...
-pruneFollowers();
-// prune in every 3.5 minutes
-setInterval(pruneFollowers, 210000);
+pruneFriends();
 
 function randIndex (arr) {
   var index = Math.floor(arr.length*Math.random());
