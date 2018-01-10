@@ -292,8 +292,8 @@ function pruneSpeed () {
       var timeout = 240000;
     }
   // timeout
-  setTimeout(pruneFriends, timeout);
   console.log("friendsDiff: setTimeout: " + timeout + " " + friendsDiff);
+  setTimeout(pruneFriends, timeout);
 };
 
 // prune as program is running...
