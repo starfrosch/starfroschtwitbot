@@ -277,18 +277,8 @@ function pruneFriends () {
 };
 
 // prune as program is running...
-// keep the following (friends) at a stable number
-if (friendsDiff < 10) {
-// minus following: slow down prune Followers to every 6 minutes
-  setInterval(pruneFriends, 360000);
-  console.log("friendsDiff: setInterval prune slower. " + friendsDiff);
-}
-else {
-// plus following: speed up prune Followers to every 3 minutes
-  setInterval(pruneFriends, 180000);
-  console.log("friendsDiff: setInterval prune faster. " + friendsDiff);
-}
 pruneFriends();
+setInterval(pruneFriends, 220000);
 
 function randIndex (arr) {
   var index = Math.floor(arr.length*Math.random());
