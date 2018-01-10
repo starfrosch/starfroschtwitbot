@@ -285,11 +285,11 @@ function pruneSpeed () {
       console.log("friendsDiff: setTimeout prune slower. " + friendsDiff);
     }
   if (friendsDiff > 5) {
-    // plus following: speed up prune Followers to every 2 minutes
+  // plus following: speed up prune Followers to every 2 minutes
       setTimeout(pruneFriends, 120000);
       console.log("friendsDiff: setTimeout prune faster. " + friendsDiff);
     }
-  // default
+  // default 4 minutes
   setTimeout(pruneFriends, 240000);
   console.log("friendsDiff: setTimeout prune default. " + friendsDiff);
 };
