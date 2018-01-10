@@ -282,7 +282,8 @@ if (friendsDiff > 5) {
     setTimeout(pruneFriends, 60000);
     console.log("friendsDiff: setTimeout prune faster. " + friendsDiff);
   }
-
+// default
+setTimeout(pruneFriends, 24000);  
 };
 
 // prune as program is running...
