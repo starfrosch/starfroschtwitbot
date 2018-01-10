@@ -272,12 +272,12 @@ function pruneFriends () {
 
 // Keep the following users constantly growing
 // https://stackoverflow.com/questions/729921/settimeout-or-setinterval
-if (friendsDiff > 0) {
+if (friendsDiff < -5) {
 // minus following: slow down prune Followers to every 6 minutes
     setTimeout(pruneFriends, 360000);
     console.log("friendsDiff: setTimeout prune slower. " + friendsDiff);
   }
-  else {
+if (friendsDiff > 5) {
   // plus following: speed up prune Followers to every 1 minutes
     setTimeout(pruneFriends, 60000);
     console.log("friendsDiff: setTimeout prune faster. " + friendsDiff);
