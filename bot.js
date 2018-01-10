@@ -247,8 +247,8 @@ function pruneFollowers () {
 
 // prune as program is running...
 pruneFollowers();
-// prune in every 2 minutes
-setInterval(pruneFollowers, 120000);
+// prune in every 3 minutes
+setInterval(pruneFollowers, 180000);
 
 function randIndex (arr) {
   var index = Math.floor(arr.length*Math.random());
