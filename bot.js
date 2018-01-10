@@ -239,14 +239,12 @@ function pruneFriends () {
   Twitter.get('followers/ids', function(err, response) {
       if(err){
         console.log("pruneFriends: followers/ids: " + err);
-        return;
       }
       var followers = response.ids;
 
       Twitter.get('friends/ids', function(err, response) {
         if(err){
           console.log("pruneFriends: friends/ids: " + err);
-          return;
         }
           var friends = response.ids
             , pruned = false;
@@ -271,10 +269,23 @@ function pruneFriends () {
           }
       });
   });
+
+// Keep the following users constantly growing
+if (friendsDiff < 3) {
+// minus following: slow down prune Followers to every 6 minutes
+    setTimeout(pruneFriends, 360000);
+    console.log("friendsDiff: setTimeout prune slower. " + friendsDiff);
+  }
+  else {
+  // plus following: speed up prune Followers to every 3 minutes
+    setTimeout(pruneFriends, 180000);
+    console.log("friendsDiff: setTimeout prune faster. " + friendsDiff);
+  }
+
 };
 
 // prune as program is running...
-setInterval(pruneFriends, 220000);
+pruneFriends();
 
 function randIndex (arr) {
   var index = Math.floor(arr.length*Math.random());
