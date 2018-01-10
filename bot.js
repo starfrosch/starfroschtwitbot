@@ -108,8 +108,8 @@ function favoriteFollowRandomTweet(){
   });
 }
 // grab & 'favorite' as soon as program is running...
-// 'favorite' a tweet in every 6 minutes
-setInterval(favoriteFollowRandomTweet, 360000);
+// 'favorite' a tweet in every 9 minutes
+setInterval(favoriteFollowRandomTweet, 540000);
 
 
 // Use Streams API for interacting with a USER ==========
@@ -227,8 +227,8 @@ function randomFollow() {
 };
 
 // random Follow as program is running...
-// Follow in every 6 minutes
-setInterval(randomFollow, 360000);
+// Follow in every 9 minutes
+setInterval(randomFollow, 540000);
 
 //
 //  prune all users that don't follow back
