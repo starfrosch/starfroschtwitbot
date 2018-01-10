@@ -239,12 +239,14 @@ function pruneFriends () {
   Twitter.get('followers/ids', function(err, response) {
       if(err){
         console.log("pruneFriends: followers/ids: " + err);
+        pruneSpeed();
       }
       var followers = response.ids;
 
       Twitter.get('friends/ids', function(err, response) {
         if(err){
           console.log("pruneFriends: friends/ids: " + err);
+          pruneSpeed();
         }
           var friends = response.ids
             , pruned = false;
@@ -269,22 +271,27 @@ function pruneFriends () {
           }
       });
   });
+pruneSpeed();
+};
 
-// Keep the following users constantly growing
-// https://stackoverflow.com/questions/729921/settimeout-or-setinterval
-if (friendsDiff < -5) {
-// minus following: slow down prune Followers to every 6 minutes
-    setTimeout(pruneFriends, 360000);
-    console.log("friendsDiff: setTimeout prune slower. " + friendsDiff);
-  }
-if (friendsDiff > 5) {
-  // plus following: speed up prune Followers to every 1 minutes
-    setTimeout(pruneFriends, 60000);
-    console.log("friendsDiff: setTimeout prune faster. " + friendsDiff);
-  }
-// default
-setTimeout(pruneFriends, 240000);
-console.log("friendsDiff: setTimeout prune default. " + friendsDiff);
+//
+// Keep the following users constantly growing, Loop faster or slower
+//
+function pruneSpeed () {
+  // https://stackoverflow.com/questions/729921/settimeout-or-setinterval
+  if (friendsDiff < -5) {
+  // minus following: slow down prune Followers to every 6 minutes
+      setTimeout(pruneFriends, 360000);
+      console.log("friendsDiff: setTimeout prune slower. " + friendsDiff);
+    }
+  if (friendsDiff > 5) {
+    // plus following: speed up prune Followers to every 1 minutes
+      setTimeout(pruneFriends, 60000);
+      console.log("friendsDiff: setTimeout prune faster. " + friendsDiff);
+    }
+  // default
+  setTimeout(pruneFriends, 240000);
+  console.log("friendsDiff: setTimeout prune default. " + friendsDiff);
 };
 
 // prune as program is running...
