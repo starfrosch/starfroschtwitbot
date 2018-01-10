@@ -124,7 +124,7 @@ stream.on('follow', followed);
 // ...trigger the callback
 function followed(event) {
   console.log('Followed: Event is running');
-  //get their twitter handler (screen name)
+  //get their twitter handler (Name AND screen name)
   var
     name = event.source.name,
     screenName = event.source.screen_name;
@@ -137,7 +137,7 @@ function followed(event) {
 // function that replies back to the user who followed and
 //    tweetNow('@' + screenName + ' Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. RT to get more #followers. Zirrrrp. #followback #hot111. ');
 // function that sends the user who followed a DM
-      directMessageNow('@' + screenName + ' Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. Zirrrrp. #followback #hot111. ', screenName);
+      directMessageNow('@' + screenName + ' Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. #followback #hot111. Any questions? Feel free to ask me.', screenName);
 
   // Follow-back User
     Twitter.post('friendships/create', {screen_name: screenName}, function(err, data, response)  {
@@ -268,8 +268,8 @@ function pruneFollowers () {
 
 // prune as program is running...
 pruneFollowers();
-// prune in every 4 minutes
-setInterval(pruneFollowers, 240000);
+// prune in every 3.5 minutes
+setInterval(pruneFollowers, 210000);
 
 function randIndex (arr) {
   var index = Math.floor(arr.length*Math.random());
