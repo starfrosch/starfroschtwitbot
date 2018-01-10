@@ -240,6 +240,7 @@ function pruneFriends () {
       if(err){
         console.log("pruneFriends: followers/ids: " + err);
         pruneSpeed();
+        return;
       }
       var followers = response.ids;
 
@@ -247,6 +248,7 @@ function pruneFriends () {
         if(err){
           console.log("pruneFriends: friends/ids: " + err);
           pruneSpeed();
+          return;
         }
           var friends = response.ids
             , pruned = false;
