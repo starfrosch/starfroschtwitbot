@@ -44,7 +44,6 @@ function retweet() {
 }
 
 // grab & retweet as soon as program is running...
-retweet();
 // retweet in every 3 minutes
 setInterval(retweet, 180000);
 
@@ -109,7 +108,6 @@ function favoriteFollowRandomTweet(){
   });
 }
 // grab & 'favorite' as soon as program is running...
-favoriteFollowRandomTweet();
 // 'favorite' a tweet in every 3 minutes
 setInterval(favoriteFollowRandomTweet, 180000);
 
@@ -229,7 +227,6 @@ function randomFollow() {
 };
 
 // random Follow as program is running...
-randomFollow();
 // Follow in every 3 minutes
 setInterval(randomFollow, 180000);
 
@@ -277,7 +274,6 @@ function pruneFriends () {
 };
 
 // prune as program is running...
-pruneFriends();
 setInterval(pruneFriends, 220000);
 
 function randIndex (arr) {
