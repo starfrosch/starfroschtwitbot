@@ -130,12 +130,15 @@ function followed(event) {
     screenName = event.source.screen_name;
 
 // Silly self greeting === No way
-   if ( screenName === 'starfroschBot' || screenName === 'starfrosch') {
-       return;
-   }
+//   if ( screenName === 'starfroschBot' || screenName === 'starfrosch') {
+//       return;
+//   }
 
-  // function that replies back to the user who followed and
-    tweetNow('@' + screenName + ' Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. RT to get more #followers. Zirrrrp. #followback #hot111. ');
+// function that replies back to the user who followed and
+//    tweetNow('@' + screenName + ' Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. RT to get more #followers. Zirrrrp. #followback #hot111. ');
+// function that sends the user who followed a DM
+      directMessageNow('@' + screenName + ' Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. Zirrrrp. #followback #hot111. ', screenName);
+
   // Follow-back User
     Twitter.post('friendships/create', {screen_name: screenName}, function(err, data, response)  {
     if(err){
@@ -160,6 +163,24 @@ function tweetNow(tweetTxt) {
     }
     else{
       console.log("Tweet: Success: " + tweetTxt);
+    }
+  });
+};
+
+//
+// Direct message to user who followed
+//
+function directMessageNow(tweetTxt, screenName) {
+  var directMessage = {
+      screen_name: screenName,
+      text: tweetTxt
+  };
+  Twitter.post('direct_messages/new', directMessage, function(err, data, response) {
+    if(err){
+      console.log("directMessageNow: " + err + " " + directMessage);
+    }
+    else{
+      console.log("directMessageNow: Success: " + directMessage);
     }
   });
 };
