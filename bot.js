@@ -130,9 +130,9 @@ function followed(event) {
     screenName = event.source.screen_name;
 
 // Silly self greeting === No way
-//   if ( screenName === 'starfroschBot' || screenName === 'starfrosch') {
-//       return;
-//   }
+  if ( screenName === 'starfroschBot' || screenName === 'starfrosch') {
+       return;
+   }
 
 // function that replies back to the user who followed and
 //    tweetNow('@' + screenName + ' Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. RT to get more #followers. Zirrrrp. #followback #hot111. ');
@@ -177,10 +177,10 @@ function directMessageNow(tweetTxt, screenName) {
   };
   Twitter.post('direct_messages/new', directMessage, function(err, data, response) {
     if(err){
-      console.log("directMessageNow: " + err + " " + directMessage);
+      console.log("directMessageNow: " + err + " " + screenName + " " + tweetTxt);
     }
     else{
-      console.log("directMessageNow: Success: " + directMessage);
+      console.log("directMessageNow: Success: " + screenName + " " + tweetTxt);
     }
   });
 };
