@@ -108,8 +108,8 @@ function favoriteFollowRandomTweet(){
   });
 }
 // grab & 'favorite' as soon as program is running...
-// 'favorite' a tweet in every 3 minutes
-setInterval(favoriteFollowRandomTweet, 180000);
+// 'favorite' a tweet in every 6 minutes
+setInterval(favoriteFollowRandomTweet, 360000);
 
 
 // Use Streams API for interacting with a USER ==========
@@ -227,8 +227,8 @@ function randomFollow() {
 };
 
 // random Follow as program is running...
-// Follow in every 3 minutes
-setInterval(randomFollow, 180000);
+// Follow in every 6 minutes
+setInterval(randomFollow, 360000);
 
 //
 //  prune all users that don't follow back
@@ -280,17 +280,17 @@ pruneSpeed();
 function pruneSpeed () {
   // https://stackoverflow.com/questions/729921/settimeout-or-setinterval
   if (friendsDiff < -5) {
-  // minus following: slow down prune Followers to every 6 minutes
-      setTimeout(pruneFriends, 360000);
+  // minus following: slow down prune Followers to every 12 minutes
+      setTimeout(pruneFriends, 720000);
       console.log("friendsDiff: setTimeout prune slower. " + friendsDiff);
     }
   if (friendsDiff > 5) {
-  // plus following: speed up prune Followers to every 2 minutes
-      setTimeout(pruneFriends, 120000);
+  // plus following: speed up prune Followers to every 4 minutes
+      setTimeout(pruneFriends, 240000);
       console.log("friendsDiff: setTimeout prune faster. " + friendsDiff);
     }
-  // default 4 minutes
-  setTimeout(pruneFriends, 240000);
+  // default 8 minutes
+  setTimeout(pruneFriends, 480000);
   console.log("friendsDiff: setTimeout prune default. " + friendsDiff);
 };
 
