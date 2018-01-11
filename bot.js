@@ -149,7 +149,7 @@ function followed(event) {
     else{
       console.log("Followed: friendships/create: Success: " + screenName);
       friendsDiff++;
-      console.log("followRandomTweet: friendsDiff: " + friendsDiff);
+      console.log("Followed: friendsDiff: " + friendsDiff);
     }
   });
 };
