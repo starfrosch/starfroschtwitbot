@@ -8,6 +8,7 @@ var
 var Twitter = new twit(config);
 
 var friendsDiff = 0;
+var timerMultiplicator = 1;
 
 //
 // RETWEET BOT ==========================
@@ -109,7 +110,7 @@ function favoriteFollowRandomTweet(){
 }
 // grab & 'favorite' as soon as program is running...
 // 'favorite' a tweet in every 9 minutes
-setInterval(favoriteFollowRandomTweet, 540000);
+setInterval(favoriteFollowRandomTweet, 540000 * timerMultiplicator);
 
 
 // Use Streams API for interacting with a USER ==========
@@ -228,7 +229,7 @@ function randomFollow() {
 
 // random Follow as program is running...
 // Follow in every 9 minutes
-setInterval(randomFollow, 540000);
+setInterval(randomFollow, 540000 * timerMultiplicator);
 
 //
 //  prune all users that don't follow back
@@ -281,15 +282,15 @@ pruneSpeed();
 //
 function pruneSpeed () {
 // default 8 minutes
-  var timeout = 480000;
+  var timeout = 480000 * timerMultiplicator;
   // https://stackoverflow.com/questions/729921/settimeout-or-setinterval
   if (friendsDiff < -5) {
   // minus following: slow down prune Followers to every 12 minutes
-      var timeout = 720000;
+      var timeout = 720000 * timerMultiplicator;
     }
   if (friendsDiff > 5) {
   // plus following: speed up prune Followers to every 4 minutes
-      var timeout = 240000;
+      var timeout = 240000 * timerMultiplicator;
     }
   // timeout
   console.log("friendsDiff: setTimeout: " + timeout + " " + friendsDiff);
