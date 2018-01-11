@@ -86,7 +86,7 @@ function favoriteFollowRandomTweet(){
     }
 //
 // choose a random tweet by topic and follow that user
-//
+/*//
     var tweets = data.statuses;
     var rTweet = randIndex(tweets);
     if(typeof rTweet != 'undefined')
@@ -103,7 +103,7 @@ function favoriteFollowRandomTweet(){
         console.log("followRandomTweet: friendsDiff: " + friendsDiff);
       }
       });
-    }
+    } */
 
   });
 }
