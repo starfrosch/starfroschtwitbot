@@ -87,7 +87,8 @@ function favoriteFollowRandomTweet(){
     }
 //
 // choose a random tweet by topic and follow that user
-/*//
+//
+/* Enable this part of the code and Twitter thinks you're a spam bot
     var tweets = data.statuses;
     var rTweet = randIndex(tweets);
     if(typeof rTweet != 'undefined')
