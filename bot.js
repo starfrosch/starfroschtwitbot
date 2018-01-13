@@ -285,11 +285,11 @@ function pruneSpeed () {
 // default 10 minutes
   var timeout = 600000 * timerMultiplicator;
   // https://stackoverflow.com/questions/729921/settimeout-or-setinterval
-  if (friendsDiff < -2) {
+  if (friendsDiff < 0) {
   // minus following: slow down prune Followers to every 14 minutes
       var timeout = 840000 * timerMultiplicator;
     }
-  if (friendsDiff > 2) {
+  if (friendsDiff > 0) {
   // plus following: speed up prune Followers to every 4 minutes
       var timeout = 240000 * timerMultiplicator;
     }
