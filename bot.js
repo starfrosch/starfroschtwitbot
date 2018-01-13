@@ -282,12 +282,12 @@ pruneSpeed();
 // Keep the following users constantly growing, Loop faster or slower
 //
 function pruneSpeed () {
-// default 8 minutes
-  var timeout = 480000 * timerMultiplicator;
+// default 10 minutes
+  var timeout = 600000 * timerMultiplicator;
   // https://stackoverflow.com/questions/729921/settimeout-or-setinterval
   if (friendsDiff < -5) {
-  // minus following: slow down prune Followers to every 12 minutes
-      var timeout = 720000 * timerMultiplicator;
+  // minus following: slow down prune Followers to every 14 minutes
+      var timeout = 840000 * timerMultiplicator;
     }
   if (friendsDiff > 5) {
   // plus following: speed up prune Followers to every 4 minutes
