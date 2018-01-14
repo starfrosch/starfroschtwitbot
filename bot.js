@@ -290,8 +290,8 @@ function pruneSpeed () {
       var timeout = 980000 * timerMultiplicator;
     }
   if (friendsDiff > 0) {
-  // plus following: speed up prune Followers to every 4 minutes
-      var timeout = 240000 * timerMultiplicator;
+  // plus following: speed up prune Followers to every 5 minutes
+      var timeout = 320000 * timerMultiplicator;
     }
   // timeout
   console.log("friendsDiff: setTimeout: " + timeout + " " + friendsDiff);
