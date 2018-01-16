@@ -241,17 +241,13 @@ function pruneFriends () {
   Twitter.get('followers/ids', function(err, response) {
       if(err){
         console.log("pruneFriends: followers/ids: " + err);
-        pruneSpeed();
-        return;
-      }
+      } else {
       var followers = response.ids;
 
       Twitter.get('friends/ids', function(err, response) {
         if(err){
           console.log("pruneFriends: friends/ids: " + err);
-          pruneSpeed();
-          return;
-        }
+        } else {
           var friends = response.ids
             , pruned = false;
 
@@ -273,7 +269,9 @@ function pruneFriends () {
             });
             }
           }
+        }
       });
+    }
   });
 pruneSpeed();
 };
