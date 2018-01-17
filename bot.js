@@ -8,7 +8,7 @@ var
 var Twitter = new twit(config);
 
 var friendsDiff = 0;
-var timerMultiplicator = 1;
+var timerMultiplicator = 0.5;
 
 //
 // RETWEET BOT ==========================
