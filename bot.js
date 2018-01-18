@@ -16,7 +16,7 @@ var timerMultiplicator = 0.8;
 // find latest tweet according the query 'q' in params
 function retweet() {
     var params = {
-        q: '"#starfrosch min_retweets:2 min_faves:2" OR "#hot111 min_retweets:2 min_faves:2" OR "#ccmusic min_retweets:2 min_faves:3"',  // REQUIRED
+        q: '"#starfrosch min_retweets:2 min_faves:2" OR "#hot111 min_retweets:2 min_faves:2" OR "#ccmusic min_retweets:2 min_faves:3" -from:ccmusic',  // REQUIRED
         result_type: 'recent',
         lang: 'en'
     };
