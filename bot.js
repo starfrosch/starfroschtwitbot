@@ -9,7 +9,7 @@ var Twitter = new twit(config);
 
 var friendsDiff = 0;
 // 0.5 is spam
-var timerMultiplicator = 0.7;
+var timerMultiplicator = 0.6;
 
 //
 // RETWEET BOT ==========================
