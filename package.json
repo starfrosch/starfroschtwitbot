@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "stafrosch's twitter bot",
   "main": "bot.js",
-  "scripts": {  "start": "node bot.js" },
+  "scripts": {
+    "start": "node bot.js"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "npm-check-updates": "^2.14.1",
     "twit": "^2.2.9"
   }
 }
