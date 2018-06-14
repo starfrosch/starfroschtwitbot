@@ -197,7 +197,7 @@ function directMessageNow(tweetTxt, screenName) {
 //
 function randomFollow() {
   console.log('randomFollow: Event is running');
-  Twitter.get('followers/ids', { screen_name: 'starfroschBot', stringify_ids : true }, function(err, response) {
+  Twitter.get('followers/ids', { stringify_ids : true }, function(err, response) {
     if(err){
       console.log("randomFollow: followers/id: " + err);
       return;
@@ -239,7 +239,7 @@ setInterval(randomFollow, 540000 * timerMultiplicator);
 
 function pruneFriends () {
   console.log('pruneFriends: Event is running');
-  Twitter.get('followers/ids', { screen_name: 'starfroschBot', stringify_ids : true }, function(err, response) {
+  Twitter.get('followers/ids', { stringify_ids : true }, function(err, response) {
       if(err){
         console.log("pruneFriends: followers/ids: " + err);
       } else {
