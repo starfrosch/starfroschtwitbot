@@ -206,7 +206,7 @@ function randomFollow() {
       var followers = response.ids
         , randFollower  = randIndex(followers);
 
-      Twitter.get('friends/ids', { user_id: randFollower }, function(err, response) {
+      Twitter.get('friends/ids', { user_id: randFollower, stringify_ids : true }, function(err, response) {
         if(err){
           console.log("randomFollow: friends/ids: " + randFollower + " " + err);
           return;
@@ -245,7 +245,7 @@ function pruneFriends () {
       } else {
       var followers = response.ids;
 
-      Twitter.get('friends/ids', function(err, response) {
+      Twitter.get('friends/ids', { stringify_ids : true }, function(err, response) {
         if(err){
           console.log("pruneFriends: friends/ids: " + err);
         } else {
