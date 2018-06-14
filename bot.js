@@ -239,7 +239,7 @@ setInterval(randomFollow, 540000 * timerMultiplicator);
 
 function pruneFriends () {
   console.log('pruneFriends: Event is running');
-  Twitter.get('followers/ids', , { screen_name: 'starfroschBot', cursor: cursor, stringify_ids : true }, function(err, response) {
+  Twitter.get('followers/ids', { screen_name: 'starfroschBot', cursor: cursor, stringify_ids : true }, function(err, response) {
       if(err){
         console.log("pruneFriends: followers/ids: " + err);
       } else {
