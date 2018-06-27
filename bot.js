@@ -123,6 +123,10 @@ var stream = Twitter.stream('user');
 // when someone follows
 stream.on('follow', followed);
 
+stream.on('error', (err) => {
+  console.log('error!', err);
+});
+
 //
 // FOLLOW-Reply AND FOLLOW-back BOT ===========================
 //
