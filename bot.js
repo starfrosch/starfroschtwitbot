@@ -189,7 +189,7 @@ function directMessageNow(tweetTxt, id) {
        "type": "message_create",
        "message_create": {
          "target": {
-           "recipient_id": data.source.id
+           "recipient_id": id
            },
          "message_data": {
            "text": tweetTxt,
