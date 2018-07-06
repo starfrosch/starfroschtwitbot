@@ -198,10 +198,10 @@ function directMessageNow(tweetTxt, id) {
        }
     }, function(err, data, response) {
       if(err){
-        console.log("directMessageNow: " + err + " " + screenName + " " + tweetTxt);
+        console.log("directMessageNow: " + err + " " + id + " " + tweetTxt);
       }
       else{
-        console.log("directMessageNow: Success: " + screenName + " " + tweetTxt);
+        console.log("directMessageNow: Success: " + id + " " + tweetTxt);
       }
     });
 };
