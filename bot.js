@@ -111,7 +111,7 @@ function favoriteFollowRandomTweet(){
   });
 }
 // grab & 'favorite' as soon as program is running...
-// 'favorite' a tweet in every 9 minutes
+// 'favorite' a tweet in every 9 * timerMultiplicator minutes
 setInterval(favoriteFollowRandomTweet, 540000 * timerMultiplicator);
 
 
@@ -147,7 +147,7 @@ function followed(event) {
 // function that replies back to the user who followed and
 //    tweetNow('@' + screenName + ' Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. RT to get more #followers. Zirrrrp. #followback #hot111. ');
 // function that sends the user who followed a DM
-      directMessageNow('@' + screenName + ' Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. #followback #hot111. Any questions? Feel free to ask me.', id);
+    directMessageNow('@' + screenName + ' Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. #followback #hot111. Any questions? Feel free to ask me.', id);
 
   // Follow-back User
     Twitter.post('friendships/create', {screen_name: screenName}, function(err, data, response)  {
@@ -243,7 +243,7 @@ function randomFollow() {
 };
 
 // random Follow as program is running...
-// Follow in every 9 minutes
+// Follow in every 9 * timerMultiplicator minutes
 setInterval(randomFollow, 540000 * timerMultiplicator);
 
 //
