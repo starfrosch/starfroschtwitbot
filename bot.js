@@ -313,6 +313,52 @@ function pruneSpeed () {
 // prune as program is running...
 pruneFriends();
 
+// Check for new followers in case we missed one
+// in every 9 minutes
+setInterval(followFriends, 540000 * timerMultiplicator);
+
+//
+//  follow all friends
+//
+
+function followFriends () {
+  console.log('followFriends: Event is running');
+  Twitter.get('followers/ids', { stringify_ids : true, count: 6 }, function(err, response) {
+      if(err){
+        console.log("followFriends: followers/ids: " + err);
+      } else {
+      var ids = response.ids
+
+      ids.forEach(function(id){
+
+        // check if already followed
+
+        Twitter.get('friendships/lookup', { user_id: id }, function (err, data, response) {
+          if (err) {
+            console.log(err);
+          } else {
+            // already following the user?
+            if(data[0].connections[0] != 'following'){
+           // not yet following --> Follow-back and DM
+            Twitter.post('friendships/create', {user_id: id}, function(err, data, response)  {
+            if (err) {
+              console.log("followFriends: friendships/create: Failed: " + id + data[0].connections[0]);
+            }
+            else {
+              console.log("followFriends: friendships/create: Success: " + id);
+              // message user
+              directMessageNow('Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. #followback #hot111. Any questions? Feel free to ask me.', id);
+            }
+            })
+            }
+            }
+          });
+      });
+    }
+  });
+};
+
+
 function randIndex (arr) {
   var index = Math.floor(arr.length*Math.random());
   return arr[index];
