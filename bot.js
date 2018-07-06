@@ -197,14 +197,6 @@ function directMessageNow(tweetTxt, id) {
          }
        }
     });
-
-    if(err){
-      console.log("directMessageNow: " + err + " " + id + " " + tweetTxt);
-    }
-    else{
-      console.log("directMessageNow: Success: " + id + " " + tweetTxt);
-    }
-
 };
 //
 //  choose a random friend of one of your followers, and follow that user
