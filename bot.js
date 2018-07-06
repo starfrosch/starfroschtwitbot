@@ -135,6 +135,7 @@ function followed(event) {
   console.log('Followed: Event is running');
   //get their twitter handler (Name AND screen name)
   var
+    id = event.source.id,
     name = event.source.name,
     screenName = event.source.screen_name;
 
@@ -146,7 +147,7 @@ function followed(event) {
 // function that replies back to the user who followed and
 //    tweetNow('@' + screenName + ' Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. RT to get more #followers. Zirrrrp. #followback #hot111. ');
 // function that sends the user who followed a DM
-      directMessageNow('@' + screenName + ' Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. #followback #hot111. Any questions? Feel free to ask me.', screenName);
+      directMessageNow('@' + screenName + ' Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. #followback #hot111. Any questions? Feel free to ask me.', id);
 
   // Follow-back User
     Twitter.post('friendships/create', {screen_name: screenName}, function(err, data, response)  {
@@ -181,21 +182,30 @@ function tweetNow(tweetTxt) {
 //
 // Direct message to user who followed
 //
-function directMessageNow(tweetTxt, screenName) {
-  var directMessage = {
-      screen_name: screenName,
-      text: tweetTxt
-  };
-  Twitter.post('direct_messages/new', directMessage, function(err, data, response) {
+function directMessageNow(tweetTxt, id) {
+
+  Twitter.post('direct_messages/events/new', {
+     "event": {
+       "type": "message_create",
+       "message_create": {
+         "target": {
+           "recipient_id": data.source.id
+           },
+         "message_data": {
+           "text": tweetTxt,
+           }
+         }
+       }
+    });
+
     if(err){
-      console.log("directMessageNow: " + err + " " + screenName + " " + tweetTxt);
+      console.log("directMessageNow: " + err + " " + id + " " + tweetTxt);
     }
     else{
-      console.log("directMessageNow: Success: " + screenName + " " + tweetTxt);
+      console.log("directMessageNow: Success: " + id + " " + tweetTxt);
     }
-  });
-};
 
+};
 //
 //  choose a random friend of one of your followers, and follow that user
 //
