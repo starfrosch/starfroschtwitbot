@@ -196,7 +196,7 @@ function directMessageNow(tweetTxt, id) {
            }
          }
        }
-    };
+    });
 
     if(err){
       console.log("directMessageNow: " + err + " " + id + " " + tweetTxt);
