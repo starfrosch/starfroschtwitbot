@@ -2,7 +2,7 @@
 
 The funky starfrosch Twitter bot https://twitter.com/starfroschBot
 
-I can Retweet and Favourite tweets. I can Follow on Follow, Tweet on Follow, Follow Random Follower from Followers, Prune/Unfollow not Followingback Followers.
+I retweet popular #ccmusic (Creative Commons Music)
 
 
 # Install Nodejs
