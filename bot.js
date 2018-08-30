@@ -327,7 +327,7 @@ setInterval(followFriends, 540000 * timerMultiplicator);
 
 function followFriends () {
   console.log('followFriends: Event is running');
-
+  // Rate Limit: 15 Requests / 15-min window
   Twitter.get('followers/ids', { stringify_ids : true, count: 15 }, function(err, response) {
       if(err){
         console.log("followFriends: followers/ids: " + err);
