@@ -358,11 +358,15 @@ function followFriends () {
             }
           });
       // wait 10 seconds
-      setTimeout(function(){ }, 10000);
+      await sleep(10000);
       });
     }
   });
 };
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 
 function randIndex (arr) {
