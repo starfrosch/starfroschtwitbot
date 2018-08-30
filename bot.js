@@ -358,19 +358,18 @@ function followFriends () {
             }
           });
       // wait 10 seconds
-      sleep(10000);
+      wait(10000);
       });
     }
   });
 };
 
-function sleep(milliseconds) {
+function wait(ms){
   var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
+  var end = start;
+  while(end < start + ms) {
+    end = new Date().getTime();
+ }
 }
 
 function randIndex (arr) {
