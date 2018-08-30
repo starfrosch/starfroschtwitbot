@@ -354,6 +354,8 @@ function followFriends () {
             }
             }
           });
+      // wait 10 seconds
+      setTimeout(function(){ }, 10000);
       });
     }
   });
