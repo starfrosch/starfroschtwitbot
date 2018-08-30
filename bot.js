@@ -344,7 +344,7 @@ function followFriends () {
 //
 // check if already followed
 //
-function checkFollowFriends {
+function checkFollowFriends(id) {
   Twitter.get('friendships/lookup', { user_id: id }, function (err, data, response) {
     if (err) {
       console.log(err);
