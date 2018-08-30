@@ -327,14 +327,15 @@ setInterval(followFriends, 540000 * timerMultiplicator);
 
 function followFriends () {
   console.log('followFriends: Event is running');
-  Twitter.get('followers/ids', { stringify_ids : true, count: 30 }, function(err, response) {
+
+  Twitter.get('followers/ids', { stringify_ids : true, count: 15 }, function(err, response) {
       if(err){
         console.log("followFriends: followers/ids: " + err);
       } else {
       var ids = response.ids
 
       ids.forEach(function(id){
-
+        // Check every 10 seconds
         setTimeout(checkFollowFriends, 10000);
 
       });
@@ -345,6 +346,7 @@ function followFriends () {
 // check if already followed
 //
 function checkFollowFriends(id) {
+  // Rate Limit: 15 Requests / 15-min window
   Twitter.get('friendships/lookup', { user_id: id }, function (err, data, response) {
     if (err) {
       console.log(err);
