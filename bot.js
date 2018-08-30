@@ -323,7 +323,7 @@ setInterval(followFriends, 540000 * timerMultiplicator);
 
 function followFriends () {
   console.log('followFriends: Event is running');
-  Twitter.get('followers/ids', { stringify_ids : true, count: 6 }, function(err, response) {
+  Twitter.get('followers/ids', { stringify_ids : true, count: 15 }, function(err, response) {
       if(err){
         console.log("followFriends: followers/ids: " + err);
       } else {
