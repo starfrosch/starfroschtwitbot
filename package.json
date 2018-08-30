@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "stafrosch's twitter bot",
   "main": "bot.js",
+  "engines": {
+    "node": "10.9.0"
+  },
   "scripts": {
     "start": "node bot.js"
   },
