@@ -121,14 +121,14 @@ setInterval(favoriteFollowRandomTweet, 540000 * timerMultiplicator);
 var stream = Twitter.stream('user');
 
 // when someone follows
-stream.on('follow', followed);
+// stream.on('follow', followed);
 
 stream.on('error', (err) => {
   console.log('error!', err);
 });
 
 //
-// FOLLOW-Reply AND FOLLOW-back BOT ===========================
+// FOLLOW-Reply AND FOLLOW-back BOT =========================== OFFLINE
 //
 // ...trigger the callback
 function followed(event) {
