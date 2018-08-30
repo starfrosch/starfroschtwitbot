@@ -335,7 +335,7 @@ function followFriends () {
 
       ids.forEach(function(id){
 
-        setTimeout(checkFollowFriends(id), 10000);
+        setTimeout(checkFollowFriends, 10000);
 
       });
     }
@@ -344,7 +344,7 @@ function followFriends () {
 //
 // check if already followed
 //
-function checkFollowFriends (id) {
+function checkFollowFriends {
   Twitter.get('friendships/lookup', { user_id: id }, function (err, data, response) {
     if (err) {
       console.log(err);
