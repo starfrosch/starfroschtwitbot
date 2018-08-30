@@ -114,18 +114,19 @@ function favoriteFollowRandomTweet(){
 // 'favorite' a tweet in every 9 * timerMultiplicator minutes
 setInterval(favoriteFollowRandomTweet, 540000 * timerMultiplicator);
 
+// deprecated Twitter API user streams
 
 // Use Streams API for interacting with a USER ==========
 // set up a user stream
 
-var stream = Twitter.stream('user');
+// var stream = Twitter.stream('user');
 
 // when someone follows
 // stream.on('follow', followed);
 
-stream.on('error', (err) => {
-  console.log('error!', err);
-});
+//stream.on('error', (err) => {
+//  console.log('error!', err);
+//});
 
 //
 // FOLLOW-Reply AND FOLLOW-back BOT =========================== OFFLINE
