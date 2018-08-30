@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "npm": "^6.1.0",
+    "npm": "^6.4.1",
     "npm-check-updates": "^2.14.2",
-    "twit": "^2.2.10"
+    "twit": "^2.2.11"
   }
 }
