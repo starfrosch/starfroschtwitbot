@@ -335,42 +335,37 @@ function followFriends () {
 
       ids.forEach(function(id){
 
-        // check if already followed
+        setTimeout(checkFollowFriends(id), 10000);
 
-        Twitter.get('friendships/lookup', { user_id: id }, function (err, data, response) {
-          if (err) {
-            console.log(err);
-          } else {
-            // already following the user?
-            if(data[0].connections[0] != 'following'){
-           // not yet following --> Follow-back and DM
-            Twitter.post('friendships/create', {user_id: id}, function(err, data, response)  {
-            if (err) {
-              console.log("followFriends: friendships/create: Failed: " + id + data[0].connections[0]);
-            }
-            else {
-              console.log("followFriends: friendships/create: Success: " + id);
-              // message user
-              directMessageNow('Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. #followback #hot111. Any questions? Feel free to ask me.', id);
-            }
-            })
-            }
-            }
-          });
-      // wait 10 seconds
-      wait(10000);
       });
     }
   });
 };
-
-function wait(ms){
-  var start = new Date().getTime();
-  var end = start;
-  while(end < start + ms) {
-    end = new Date().getTime();
- }
-}
+//
+// check if already followed
+//
+function checkFollowFriends (id) {
+  Twitter.get('friendships/lookup', { user_id: id }, function (err, data, response) {
+    if (err) {
+      console.log(err);
+    } else {
+      // already following the user?
+      if(data[0].connections[0] != 'following'){
+      // not yet following --> Follow-back and DM
+      Twitter.post('friendships/create', {user_id: id}, function(err, data, response)  {
+      if (err) {
+        console.log("followFriends: friendships/create: Failed: " + id + data[0].connections[0]);
+      }
+      else {
+        console.log("followFriends: friendships/create: Success: " + id);
+        // message user
+        directMessageNow('Thank you for following. Zirrrrp. Solar power for my circuits. Visit my master @starfrosch https://starfrosch.com Zirrrrp. #followback #hot111. Any questions? Feel free to ask me.', id);
+      }
+      })
+      }
+      }
+    });
+};  
 
 function randIndex (arr) {
   var index = Math.floor(arr.length*Math.random());
