@@ -336,8 +336,6 @@ function followFriends () {
 
       ids.forEach(function(id){
         // Check every 10 seconds
-//        setTimeout(checkFollowFriends, 10000);
-
         setTimeout(function(){ checkFollowFriends(id) }, 10000);
 
       });
