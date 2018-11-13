@@ -17,7 +17,7 @@ var timerMultiplicator = 2.1;
 // find latest tweet according the query 'q' in params
 function retweet() {
     var params = {
-        q: '"#starfrosch min_retweets:2 min_faves:2" OR "#hot111 min_retweets:2 min_faves:2" OR "#ccmusic min_retweets:3 min_faves:3" -from:markwinder8 AND -from:eii_ccmusic',  // REQUIRED
+        q: '("#starfrosch min_retweets:2 min_faves:2" OR "#hot111 min_retweets:2 min_faves:2" OR "#ccmusic min_retweets:3 min_faves:3") AND -from:markwinder8 AND -from:eii_ccmusic',  // REQUIRED
         result_type: 'recent',
         lang: 'en'
     };
@@ -46,8 +46,8 @@ function retweet() {
 }
 
 // grab & retweet as soon as program is running...
-// retweet in every 6 minutes
-setInterval(retweet, 360000);
+// retweet in every 3 minutes
+setInterval(retweet, 180000);
 
 //
 // FAVORITE and FOLLOW BOT====================
