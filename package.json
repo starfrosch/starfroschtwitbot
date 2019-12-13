@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "npm": "^6.11.2",
+    "npm": "^6.13.4",
     "npm-check-updates": "^3.1.21",
     "twit": "^2.2.11"
   }
