@@ -12,8 +12,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "npm": "^6.14.11",
     "npm-check-updates": "^3.2.2",
+=======
+    "npm": "^6.14.6",
+    "npm-check-updates": "^3.1.21",
+>>>>>>> 4fb4022f5447cc3482126484a45b6ecf989cab66
     "twit": "^2.2.11"
   }
 }

@@ -1,4 +1,4 @@
-# twitbot - I am starfroschBot
+# starfroschtwitbot - I am starfroschBot
 
 The funky starfrosch Twitter bot https://twitter.com/starfroschBot
 
@@ -9,7 +9,7 @@ I retweet popular #ccmusic (Creative Commons Music)
 
 brew install node
 
-git clone https://github.com/starfrosch/twitbot.git
+git clone https://github.com/starfrosch/starfroschtwitbot.git
 
 # Configure
 
