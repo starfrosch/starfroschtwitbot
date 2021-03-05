@@ -26,6 +26,7 @@ install.usage = usage(
   '\nnpm install [<@scope>/]<pkg>@<tag>' +
   '\nnpm install [<@scope>/]<pkg>@<version>' +
   '\nnpm install [<@scope>/]<pkg>@<version range>' +
+  '\nnpm install <alias>@npm:<name>' +
   '\nnpm install <folder>' +
   '\nnpm install <tarball file>' +
   '\nnpm install <tarball url>' +
@@ -138,6 +139,10 @@ var validateArgs = require('./install/validate-args.js')
 var saveRequested = require('./install/save.js').saveRequested
 var saveShrinkwrap = require('./install/save.js').saveShrinkwrap
 var audit = require('./install/audit.js')
+var {
+  getPrintFundingReport,
+  getPrintFundingReportJSON
+} = require('./install/fund.js')
 var getSaveType = require('./install/save.js').getSaveType
 var doSerialActions = require('./install/actions.js').doSerial
 var doReverseSerialActions = require('./install/actions.js').doReverseSerial
@@ -192,7 +197,7 @@ function install (where, args, cb) {
   var dryrun = !!npm.config.get('dry-run')
 
   if (npm.config.get('dev')) {
-    log.warn('install', 'Usage of the `--dev` option is deprecated. Use `--only=dev` instead.')
+    log.warn('install', 'Usage of the `--dev` option is deprecated. Use `--also=dev` instead.')
   }
 
   if (where === globalTop && !args.length) {
@@ -240,6 +245,7 @@ function Installer (where, dryrun, args, opts) {
   this.saveOnlyLock = opts.saveOnlyLock
   this.global = opts.global != null ? opts.global : this.where === path.resolve(npm.globalDir, '..')
   this.audit = npm.config.get('audit') && !this.global
+  this.fund = npm.config.get('fund') && !this.global
   this.started = Date.now()
 }
 Installer.prototype = {}
@@ -644,6 +650,9 @@ Installer.prototype.saveToDependencies = function (cb) {
   validate('F', arguments)
   if (this.failing) return cb()
   log.silly('install', 'saveToDependencies')
+  // Note idealTree will be mutated during the save operations below as the
+  // package is reloaded from disk to preserve additional details. This means
+  // steps after postInstall will see a slightly different package object.
   if (this.saveOnlyLock) {
     saveShrinkwrap(this.idealTree, cb)
   } else {
@@ -872,7 +881,6 @@ Installer.prototype.printInstalledForHuman = function (diffs, auditResult) {
   report += ' in ' + ((Date.now() - this.started) / 1000) + 's'
 
   output(report)
-  return auditResult && audit.printInstallReport(auditResult)
 
   function packages (num) {
     return num + ' package' + (num > 1 ? 's' : '')
@@ -894,9 +902,27 @@ Installer.prototype.printInstalledForHuman = function (diffs, auditResult) {
     if (argument.url) returned += ' (' + argument.email + ')'
     return returned
   }
+
+  const { fund, idealTree } = this
+  const printFundingReport = getPrintFundingReport({
+    fund,
+    idealTree
+  })
+  if (printFundingReport.length) {
+    output(printFundingReport)
+  }
+
+  if (auditResult) {
+    return audit.printInstallReport(auditResult)
+  }
 }
 
 Installer.prototype.printInstalledForJSON = function (diffs, auditResult) {
+  const { fund, idealTree } = this
+  const printFundingReport = getPrintFundingReportJSON({
+    fund,
+    idealTree
+  })
   var result = {
     added: [],
     removed: [],
@@ -905,6 +931,7 @@ Installer.prototype.printInstalledForJSON = function (diffs, auditResult) {
     failed: [],
     warnings: [],
     audit: auditResult,
+    funding: printFundingReport,
     elapsed: Date.now() - this.started
   }
   var self = this
