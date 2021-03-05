@@ -13,24 +13,8 @@ git clone https://github.com/starfrosch/starfroschtwitbot.git
 
 # Configure
 
-Add your tokens and secrets from http://apps.twitter.com to config.js
-
-```javascript
-//config.js
-/** TWITTER APP CONFIGURATION
- * consumer_key
- * consumer_secret
- * access_token
- * access_token_secret
- */
-
-module.exports = {
-  consumer_key: '',
-  consumer_secret: '',
-  access_token: '',
-  access_token_secret: ''
-}
-```
+Add your tokens and secrets from http://apps.twitter.com to 
+.env and Heroku...Settings...Env Vars
 
 Modify your twitter search terms and time intervals in bot.js
 
