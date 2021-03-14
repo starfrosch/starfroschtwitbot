@@ -56,7 +56,7 @@ setInterval(retweet, 180000);
 function favoriteFollowRandomTweet(){
   console.log('favoriteFollowRandomTweet: Event is running');
   var params = {
-      q: '"#YouTuber -buy -promo min_retweets:2 min_faves:2" OR "vlog min_retweets:2 min_faves:2" OR "starfrosch" OR "#ccmusic" OR "#hot111"',  // REQUIRED
+      q: '"#YouTuber -buy -promo min_retweets:2 min_faves:2" OR "vlog min_retweets:2 min_faves:2" OR "starfrosch" OR "cookeatcook" OR "#ccmusic" OR "#hot111"',  // REQUIRED
       result_type: 'recent',
       lang: 'en'
   };
